@@ -1,0 +1,21 @@
+python:
+    python_version: 3.5
+   
+worker_limit: 24
+
+timeout: 900
+
+tool_config:
+    git:
+        version: "2.0.3"
+
+plan:
+    - default
+    - flaky_integration
+    - integration
+profiles:
+    default:
+        tests:
+            - npm test
+        test_pattern:
+            - spec/unit/**_spec.rb
