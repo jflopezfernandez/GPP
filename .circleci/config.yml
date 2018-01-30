@@ -1,0 +1,6 @@
+version: 2
+jobs:
+    build:
+        working_directory: ./
+        steps:
+            - echo "<CONFIG.YML>"
