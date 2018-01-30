@@ -11,8 +11,9 @@ environment:
 test: off
 
 install:
-    - ps: 'Start-FileDownload "https://cygwin.com/setup-x86_64.exe" -FileName "setup-x86_64.exe"' 
-    - 'setup-x86_64.exe --quite-mode --no-shortcuts --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir %CYG_ROOT%\var\cache\setup" --packages "%CYG_PACKAGES%"'
+    - ps: 'Start-FileDownload "https://cygwin.com/setup-x86_64.exe" -FileName "setup-x86_64.exe"'
+    - 'setup-x86_64.exe --local-install --quiet-mode --no-shortcuts --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir %CYG_ROOT%\var\cache\setup" --packages "%CYG_PACKAGES%"'
+#    - 'setup-x86_64.exe --quiet-mode --no-shortcuts --only-site --root "%CYG_ROOT%" --site "%CYG_MIRROR%" --local-package-dir %CYG_ROOT%\var\cache\setup" --packages "%CYG_PACKAGES%"'
     
 build_script:
     - '%CYG_BASH% -lc "cd $APPVEYOR_BUILD_FOLDER; mkdir build_cygwin"'
