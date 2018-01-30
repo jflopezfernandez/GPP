@@ -9,4 +9,5 @@ int main(int argc, char *argv[])
     // TODO: Parse command line arguments
     // TODO: Create project directories
     // TODO: Write files
+	std::cout << "<Testing CI Config...>\n";
 }
