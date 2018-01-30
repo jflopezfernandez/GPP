@@ -1,15 +1,8 @@
 language: cpp
 compiler: gcc
+cache: false
 dist: trusty
 
-before_install:
-    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    - sudo apt-get update -qq
-
-install:
-    - sudo apt-get install -qq g++
-    - sudo update-alternatives --install /usr/bin/g++ g++
-    
 script:
     - g++ main.cpp -o travis_gcc_cpp
     - ./travis_gcc_cpp
