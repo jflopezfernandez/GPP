@@ -4,6 +4,9 @@
 
 #include "main.h"
 
-int main() {
-    std::cout << "testing...\n";
+int main(int argc, char *argv[])
+{
+    // TODO: Parse command line arguments
+    // TODO: Create project directories
+    // TODO: Write files
 }
