@@ -8,6 +8,7 @@ install_manifest.txt
 compile_commands.json
 CTestTestfile.cmake
 
+/Hubot/
 /.idea/
 /cmake-build-debug/
 /cmake-build-debug-gcc-720/
