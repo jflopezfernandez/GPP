@@ -75,7 +75,7 @@ deploy:
       username: devmain
       password:
         secure: potter11
-      folder:
+      folder: /storage/ssd1/096/4158096
       application:
       active_mode: false
       beta: true
