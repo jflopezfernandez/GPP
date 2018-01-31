@@ -52,6 +52,13 @@ services:
 
 before_build:
     - ps: Write-Host "Project AppVeyor Configuration"
+
+build_script:
+    - mkdir build-msbuild
+    - cd build-msbuild
+    - cmake -G "Visual Studio 15 2017 Win64" ..
+    - msbuild travis_gcc_gcov.sln
+    - cd ..
    
    
 #-----------------------------------------------------------------------------#
