@@ -44,8 +44,6 @@ configuration:
 # Abort on first error
 matrix:
     fast_finish: true
-    
-    
 
 test: off
 
@@ -108,8 +106,6 @@ on_finish:
 notifications:
     - provider: Email
       to: josefernando.lopezfernandez@snhu.edu
-      subject: 'Build {{status}}'
-      message: "{{message}}, {{commitId}}, {{version}}"
       on_build_success: false
       on_build_failure: true
       on_build_status_changed: false
