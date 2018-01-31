@@ -1,0 +1,13 @@
+plugins:
+    fixme:
+        enabled: true
+        config:
+            strings:
+                - FIXME
+                - BUG
+                - CUSTOM
+                - TODO
+    markdownlint:
+        enabled: true
+    shellcheck:
+        enabled: true
