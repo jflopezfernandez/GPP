@@ -1,6 +1,38 @@
 
-version: 1.0.{build}
- 
+version: 1.0.{build}-{branch}
+
+branches:
+   only:
+    - master
+    - production
+    
+# Don't build on new tags
+skip_tags: true
+    
+max_jobs: 1
+
+#-----------------------------------------------------------------------------#
+#
+#                           ENVIRONMENT CONFIGURATION
+#
+#-----------------------------------------------------------------------------#
+    
+# Build worker image (VM template)
+image: Visual Studio 2017
+    
+init:
+    - git config --global core.autocrlf input
+    
+environment:
+    global:
+        author: "Jose Fernando Lopez Fernandez"
+    
+#-----------------------------------------------------------------------------#
+#
+#                              BUILD CONFIGURATION
+#
+#-----------------------------------------------------------------------------#
+    
 platform:
     - x86
     - x64
@@ -16,27 +48,7 @@ environment:
 matrix:
     fast_finish: true
     
-branches:
-    only:
-        - master
-        - production
-        
-# Don't build on new tags
-skip_tags: true
-
-max_jobs: 1
-
-notifications:
-    - provider: Email
-      to: josefernando.lopezfernandez@snhu.edu
-      on_build_success: false
-      on_build_failure: true
-      on_build_status_changed: false
-      
-    - provider: GitHubPullRequest
-      auth_token:
-        secure: uwtxurypr8n6q5gop9bx
-      template: "{{#passed}}:white_check_mark:{{/passed}}{{#failed}}:x:{{/failed}} [Build {{&projectName}} {{buildVersion}} {{status}}]({{buildUrl}}) (commit {{commitUrl}} by @{{&commitAuthorUsername}})"
+    
 
 test: off
 
@@ -45,6 +57,14 @@ services:
 
 before_build:
     - ps: Write-Host "Project AppVeyor Configuration"
+   
+   
+#-----------------------------------------------------------------------------#
+#
+#                         DEPLOYMENT CONFIGURATION
+#
+#-----------------------------------------------------------------------------#
+   
    
 deploy:
     - provider: FTP
@@ -64,3 +84,43 @@ before_deploy:
     
 after_deploy:
     - ps: Write-Host "<Application Deployed Successfully>"
+    
+    
+#-----------------------------------------------------------------------------#
+#
+#                               GLOBAL HANDLERS
+#
+#-----------------------------------------------------------------------------#
+
+on_success:
+    - ps: Write-Host "<Build Successful>"
+    
+on_failure:
+    - ps: Write-Host "<Build Failed>"
+    
+on_finish:
+    - ps: Write-Host "<Build Process Complete>"
+
+#-----------------------------------------------------------------------------#
+#
+#                               NOTIFICATIONS
+#
+#-----------------------------------------------------------------------------#
+
+
+notifications:
+    - provider: Email
+      to: josefernando.lopezfernandez@snhu.edu
+      subject: 'Build {{status}}'
+      message: "{{message}}, {{commitId}}, {{version}}"
+      on_build_success: false
+      on_build_failure: true
+      on_build_status_changed: false
+      
+    - provider: GitHubPullRequest
+      on_build_success: false
+      on_build_failure: true
+      on_build_status_changed: false
+      auth_token:
+        secure: uwtxurypr8n6q5gop9bx
+      template: "{{#passed}}:white_check_mark:{{/passed}}{{#failed}}:x:{{/failed}} [Build {{&projectName}} {{buildVersion}} {{status}}]({{buildUrl}}) (commit {{commitUrl}} by @{{&commitAuthorUsername}})"
