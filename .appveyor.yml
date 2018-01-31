@@ -40,9 +40,6 @@ platform:
 configuration:
     - Debug
     - Release
-
-environment:
-    global:
     
 # Abort on first error
 matrix:
