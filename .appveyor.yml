@@ -1,4 +1,10 @@
 
+#-----------------------------------------------------------------------------#
+#
+#                           GENERAL CONFIGURATION
+#
+#-----------------------------------------------------------------------------#
+
 version: 1.0.{build}-{branch}
 
 branches:
@@ -34,12 +40,12 @@ environment:
 #-----------------------------------------------------------------------------#
     
 platform:
-    - x86
-    - x64
+    - x86 
+    - Any CPU 
     
 configuration:
-    - Debug
-    - Release
+    - Debug 
+    - Release 
     
 # Abort on first error
 matrix:
@@ -71,7 +77,7 @@ build_script:
 deploy:
     - provider: FTP
       protocol: ftp|ftps|sftp
-      host: files.000webhost.com
+      host: files.000webhost.com/devmain
       username: devmain
       password:
         secure: potter11
